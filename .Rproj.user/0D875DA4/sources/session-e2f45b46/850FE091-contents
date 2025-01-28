@@ -1,0 +1,47 @@
+# GitHub
+
+
+## Set up an account
+
+## Remote repositories
+
+If you want to share your package with other people, you will need to create a remote repository for your project on a host like GitHub. First you will need to create an account if you do not already have one. Click [here](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account) for instructions on how to do so.
+
+Once you have an account, on the repositories tab of your profile you can select to initiate a new repository. You will be required to name your project, and select if the repository is to be public or private. You can choose if you want to provide a description of your project, or if you want to automatically generate helper files like a README, .gitignore, or a license. If you are creating this remote repository for an already existing local repository you should NOT initiate a README, .gitignore, or choose a license. If you choose to initiate these files you will need to resolve merge conflicts when you try to push your local project to the remote repository.
+
+Once you select **Create repository**, you will be taken to a page with instructions on how set up the repository depending on your particular situation. The commands are provided for you including the correct Git addresses, so you can copy the relevant commands directly into terminal, making sure that you are within the correct local directory. If you use the terminal window within RStudio, you should automatically be in the correct directory.
+
+For example, if you want to push a local repository on to your new remote, you can follow the instructions under the heading "…or push an existing repository from the command line", as bellow:
+```
+git remote add origin https://github.com/JohnDoe/test.git
+git push -u origin main
+```
+
+From this point on, you can work directly with the Git tab on RStudio. Whenever you have an update to the package, commit the change and push the new version to your GitHub repository.
+
+### Automatically generating a remote repository
+
+If Git on your computer has already been set up to interact with your GitHub account, you will be able to automatically generate a remote repository, and push your package to that remote using the `usethis` package.
+
+Simply run:
+```{r, eval=FALSE}
+use_github()
+```
+
+The following checks will be performed: 
+
+- that the project is already a Git repo
+- that the current branch is the default branch
+- that there are no uncommitted changes
+- that there are no pre-existing origin remotes
+
+If these checks pass, the following actions will be performed:
+
+- An associated repository will be created on your GitHub
+- That GitHub repository will be added to your local repository as the origin remote
+- Make an initial push to GitHub
+- Calls `use_github_links()` if the project is an R package, so as to add information to the DESCRIPTION file regarding the GitHub repository
+
+### Clone repository
+
+

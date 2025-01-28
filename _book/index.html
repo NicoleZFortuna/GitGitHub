@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Collaborating on code with GitHub</title>
+  <meta name="description" content="Collaborating on code with GitHub" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Collaborating on code with GitHub" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Collaborating on code with GitHub" />
+  
+  
+  
+
+<meta name="author" content="Nicole Fortuna" />
+
+
+<meta name="date" content="2025-01-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="hello-bookdown.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Git</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#what-is-git"><i class="fa fa-check"></i><b>1.1</b> What is Git?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i><b>1.1.1</b> Prerequisites</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#setup-git-on-your-computer"><i class="fa fa-check"></i><b>1.2</b> Setup git on your computer</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#getting-help-with-git"><i class="fa fa-check"></i><b>1.2.1</b> Getting help with git</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
+<ul>
+<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>3.1</b> Chapters and sub-chapters</a></li>
+<li class="chapter" data-level="3.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.2</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>4</b> Parts</a></li>
+<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes</a></li>
+<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Collaborating on code with GitHub</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Collaborating on code with GitHub</h1>
+<p class="author"><em>Nicole Fortuna</em></p>
+<p class="date"><em>2025-01-28</em></p>
+</div>
+<div id="git" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Git<a href="index.html#git" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-git" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> What is Git?<a href="index.html#what-is-git" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Git is a version control software which can track the development of your projects through time. Git will take a snapshot of your project at key stages (as indicated by you), which allows you to travel back to previous iterations of your project. In addition, git uses a feature called branching that allows the user to maintain multiple versions of their code at once. These versions can have different histories and incompatibilities, and can be used as a testing area when developing new features for your project. The functionality of git is best realised in multi-user projects as it keeps track of exactly who made what changes and when, and provides a mechanism to merge files that have been edited by multiple people.</p>
+<p>People who use git, will generally utilise both local and remote repositories for their projects. A local repository is one that is housed on your personal computer, and is where project development tends to occur. The remote repository can have several uses. The remote repository can be used as a backup of the work that you have done, so that you have an additional copy in case something goes wrong on your personal computer, or so that you can access your project from many different computers. It can also act as an intermediary for a project with multiple developers. If a project has multiple developers, each developer can work on their contributions on their local computer (as seen in Figure 1), and then add to the remote periodically (making sure to merge any conflicts between users along the way).</p>
+<div class="float">
+<img src="pics/gitFigures2.jpg" alt="Figure 1. Example interaction between multiple developers of a project. Commits represet snapshots in time and are listed in reverse chronological order. Commits have been restricted to the two most recent for simplicity’s sake. " />
+<div class="figcaption"><font color = "grey">Figure 1. Example interaction between multiple developers of a project. Commits represet snapshots in time and are listed in reverse chronological order. Commits have been restricted to the two most recent for simplicity’s sake. </font></div>
+</div>
+<p>The most commonly used host for remote git repositories is <a href="http://www.github.com">github</a>, however there exists many alternatives like <a href="htt://https://bitbucket.org/">bitbucket</a>, and <a href="https://about.gitlab.com/">GitLab</a>. Local repositories can be interacted with directly from the Terminal. However, many GUIs have been created over the years in order to make git more user friendly. If your project is being developed using RStudio, this IDE (Integrated Development Environment) already comes with inbuilt git functionality. Otherwise, a popular and easy to use GUI is <a href="http://https://desktop.github.com/">GitHub Desktop</a>. You will have seen a tutorial for how to use this particular GUI in the first week of <a href="https://shire.science.uq.edu.au/QBIOL/QBIO7006/docs/week1.html">QBIO7006</a>.</p>
+<p>For the purposes of this tutorial, we will demonstrate how to interact with git directly through Terminal. When giving example commands, anything set between these symbols &lt;&gt; represents a variable input to be provided by the user. This tutorial gives a working knowledge of git which should be adequate for most git users. For additional help and further functionality, the book <a href="https://git-scm.com/book/en/v2">Pro Git</a> is recommended.</p>
+<div id="prerequisites" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In order to interact with git directly from the command line, you will need to be familiar with navigating your computer through the terminal, as well as know how to edit files in the terminal by using vim. To brush up on these skills, refer to the UNIX and LINUX chapter of this document.</p>
+</div>
+</div>
+<div id="setup-git-on-your-computer" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Setup git on your computer<a href="index.html#setup-git-on-your-computer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To download git, visit <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> and select the correct OS for your computer. Depending on your OS; either git will begin to download automatically, or you will be provided with a variety of options for installation.</p>
+<p>Once git has been successfully downloaded, you can initiate the global settings of git on your computer. While a variety of settings can be specified, the necessary ones include your user name and email, so that git can track when you make a change.</p>
+<p>To set-up your user name, type the following command into Terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="op">&lt;</span><span class="st">&quot;John Doe&quot;</span><span class="op">&gt;</span></span></code></pre></div>
+<p>To provide your email:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="op">&lt;</span>johndoe@example.com<span class="op">&gt;</span></span></code></pre></div>
+<p>To return your current user settings:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span></code></pre></div>
+<p>To return a single user setting:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1" tabindex="-1"></a><span class="fu">git</span> config <span class="op">&lt;</span>user.name<span class="op">&gt;</span></span></code></pre></div>
+<div id="getting-help-with-git" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Getting help with git<a href="index.html#getting-help-with-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To get help directly from the terminal, the following commands are useful.</p>
+<p>To get help with the most common git commands:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1" tabindex="-1"></a><span class="fu">git</span> help</span></code></pre></div>
+<p>For more commands:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1" tabindex="-1"></a><span class="fu">git</span> help <span class="at">-a</span></span></code></pre></div>
+<p>For help with a specific command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="index.html#cb7-1" tabindex="-1"></a><span class="fu">git</span> help <span class="op">&lt;</span>config<span class="op">&gt;</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="hello-bookdown.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
