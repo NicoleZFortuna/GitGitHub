@@ -76,14 +76,21 @@ Git keeps a record of every committed version of a project. Each commit contains
 
 There are many reasons as to why you may want to revert to a previous version of a file. It could be that the current solution that has been built is not viable, so you want to return to the time before your current fix in order to go in a different direction. It could also be that the current version of the project is broken in some way, and so you want to go back to a functioning version of the code. Regardless of the reason, this is a step that should be taken with caution, because once you have reverted to a previous version of the code, you will lose all the subsequent work that you have done. This risk can be mitigated through the use of branches, which we will discuss later.
 
+Unfortunately, to go back in time you will need to interact with Terminal (or Git Bash). If you are using a Mac, you should be able to open a Terminal window as part of your RStudio project, just select **Tools** -> **Terminal**. If you are using Windows, you will need to open a Git Bash session and make sure that you are in the correct working directory. This can be done by typing the command `cd` (change directory), and then dragging and dropping the folder into the Git Bash window (this will generate the file path).
+
 If you want to revert to the most recent commit (and loose the most recent modifications that you have made), you can run:
 ```{bash eval = FALSE}
 git reset
 ```
 
-If you would like to go further back in time in your project, you will need to refer to the exact snapshot that you want to return to. If you run `git log` in the terminal, you will find the ID of each snapshot you have taken. Use the description to find which version you want to revert to, and copy the first 10 (this is an approximate amount) or so symbols in the log ID. For example, the first few symbols of the version you want to revert to might be a6dsjd95y. In which case you would run:
+If you would like to go further back in time in your project, you will need to refer to the exact snapshot that you want to return to. If you select the **History** button, a window will open showing all of your past commits.
+
+<center><img src="pics/HistoryReset.png" width="500"></center>
+
+If you select the commit you would like to return to, you will see a series of letters and numbers refered to as SHA. This is the equivalent of a commit ID. For example, the first few symbols of the version you want to revert to might be 0022cdd166. In which case you would run:
+
 ```{bash eval = FALSE}
-git reset --hard <a6dsjd95y>
+git reset --hard <0022cdd166>
 ```
 
 <b> NOTE: this is one of the few actions that cannot be reversed. If returning to a previous version, any more recent work will be permanently lost on that branch. TREAD CAREFULLY! </b>
@@ -91,36 +98,10 @@ git reset --hard <a6dsjd95y>
 ## Creating and switching between branches
 An amazing feature of git, is the ability to have multiple branches for a project. Different branches can be created if you need to debug a feature, create a new feature, etc. Once you are happy with your changes, branches can be merged back in to the master. The initial, automatic branch that is created when you initiate git, is called master. Any additional branches should be given a name that will indicate it's purpose. When you create a new branch, that new branch will have the entire history of the branch that you are currently working on. Therefore if you would like to revert to a previous version of a project, it is a good idea to first create another branch that will keep a record of your more recent commits as a backup. 
 
-To create a new branch in order to develop a new feature:
-```{bash eval = FALSE}
-git branch <NewFeature>
-```
+When dealing with branches the following section of the git panel will be relevant.
+<img src="pics/Branch.png" width="150">
 
-To list all the current branches:
-```{bash eval = FALSE}
-git branch -a
-```
-
-To switch to a different branch (one of the branches that exist in your local repository):
-```{bash eval = FALSE}
-git checkout <NewFeature>
-```
-
-Once you are on your new branch, you can continue to modify your code as per usual, including creating new snapshots of the code. As you commit code on different branches, the log history of your branches will begin to diverge. Therefore it is important to make sure that you are doing work on the correct branch.
-
-It is possible to push new branches to the remote repository so that other team members can look at the code before it is merged into the master branch.
-
-To push an entire branch to the remote:
-```{bash eval = FALSE}
-git push -u origin <NewFeature>
-```
-
-To return to the original master branch:
-```{bash eval = FALSE}
-git checkout master
-```
-
-Before you switch to new branches, make sure that you have committed any changes that you have made.
+To create a new branch click on the **New Branch** button. This will open a new window that will allow you to name your new branch. Once you select **Create**, you will see that the **Main** drop down menu has now changed to your new branch. If you select the drop down menu, you will be able to switch between any branch that you have created. If switching between branches, make sure that you have commited any changes that you want to keep on the current branch.
  
 ## Merging branches
 A consequence of having multiple branches with partially overlapping histories, is that if you want to merge two branches together, there may be conflicts in the code. The way that git merges files is by comparing the changes that have been made to the code in each of the two branches in comparison to the most recent shared commit history (the point in time when the new branch was created). If the changes in each branch have occurred in different files or lines in the code, then git will automatically incorporate those changes. If the same section of code has been modified on both branches, then git will require the user to manually merge the two files.
