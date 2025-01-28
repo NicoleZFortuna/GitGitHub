@@ -1,67 +1,41 @@
 # Tracking code with Git
 
-## Setting up a repository
-### Creating a local repository
-A git repository is a set of files associated with a particular project that are all tracked together. To track a set of files, git needs to be initiated within the topmost level of a file containing the work in question. Every file at and within the file hierarchy that git is initiated in will be tracked by git.
+## Creating a local repository
+A git repository is a set of files associated with a particular project that are tracked together. To track a set of files, git needs to be initiated within the topmost level of a folder containing the work in question. Every file at and within the file hierarchy that git is initiated in will be tracked by git. If you are writing code in R, it is best to organise your code in an RStudio project, and then use RStudio to initiate your repository and track your progress.
 
-To initiate a repository on your local computer, navigate through the terminal to the location of your project and run the command:
-```{bash eval = FALSE}
-git init
+An R package that is useful for automating a lot of the functions of git is `usethis`. This package is also useful if you ever want to write your own R package. 
+```{r, eval=FALSE}
+install.packages("usethis")
+library(usethis)
 ```
 
-This command will set up an invisible .git file within the specified directory. 
+### Initiating a repository for existing code
+If you have Git installed on your computer, you can turn an existing project into a git repository by executing the following line in the of your project:
 
-To view the .git file you can run the command:
-```{bash eval = FALSE}
-ls -a
+```{r, eval=FALSE}
+use_git()
 ```
 
-Once you have initiated your git repository, it is time to take the first snapshot of your project. To take a snapshot, first the changes that you want to capture need to be staged. Staging a file makes it visible to git. Once git can see the files you are interested in, you can commit those changes to make the snapshot. In the case of your first commit, it is likely that you will want to capture all the files in the directory and therefore you can stage all of the available files. 
+The function will prompt you to make a first commit. Agree.
 
-At any point, you can check the status of the files within git using the following command:
-```{bash eval = FALSE}
-git status
-```
+Alternatively, click **Tools** -> **Version Control** -> **Project Setup**, then click the dropdown box **Version control system** and select **Git**.
 
-If you have just initiated a git repository on your local computer, if you run the ``` git status ``` command, you will see all the files within your repository highlighted in red. This is because these files are not yet tracked.
+You should see a Git tab in the top right hand panel once Git is associated with a project. If you can't, select **View** -> **Show Git**. If it still does not appear, you may need to close and reopen RStudio.
 
-To stage all the files within the directory:
-```{bash eval = FALSE}
-git add -A
-```
+### Initiating a new project with git 
 
-The ```-A``` in this instance is used to refer to all the files within the directory. If you only wanted to stage particular files, you could replace ```-A``` with the name of a particular file.
+In RStudio, click on **File** -> **New Project**, or the <img src="pics/ProjectButton.png" width="20"> button. A 'Create Project' window will pop up, and you should select **New Directory->New Project**. The following window will then open, allowing you to select a name for your package, as well as choose the directory in which the package will be stored. At this point, you can select if you would like to initiate this project with a Git repository. If you already have Git installed on your computer, I recommend that you check the **Create a git repository** box before you select **Create Project**.
 
-If you were to run the ``` git status ``` command at this point, all the files within the git repository will be listed again, but this time in green. This is because these files have all been staged, and are therefore ready for a snapshot to be taken. Only files that are highlighted green will be included in the snapshot.
+<center><img src="pics/ProjectPrompt.png" width="400"></center>
 
-To take the snapshot, the files need to be committed:
-```{bash eval = FALSE}
-git commit -m <"My first commit.">
-```
-
-In this command ```-m``` dictates that you want to write a message. The message you provide within quotation marks will be used to describe the snapshot that you have taken. The first commit message is generally something innocuous like ```"First commit."```. As you take more snapshots in the future, you should write a meaningful message that describes what is different about the code in comparison to the previous snapshot.
+A new RStudio window will open containing your new project. In your project window, you will see that a number of files have been automatically generated. These are your project file, and .gitignore file. We will talk about .gitigore later on. You should see these files listed in the Git tab in the top right hand panel. Now would be a good time to make your first commit. Go to the [**How to use git to track your package over time**](## how-to-use-git-to-track-your-package-over-time) section for instructions on how to do this.
 
 ## Hiding files from git
 Within a project there are often a number of invisible files that are created automatically by the tools being used. For example, R will often generate a .Rhistory file that is of no benefit to you to track. In this case it is advisable to hide these files from git in order to prevent them from being unnecessarily tracked. Files are hidden from Git by placing them in a .gitignore file within the same directory that you initiated git.
 
-Within your project directory, you can create a .gitignore file with the command:
-```{bash eval = FALSE}
-touch .gitignore
-```
+For files/folders listed in .gitignore, the path directory of the files should be relative to the directory of the .gitignore file. You can edit the file by opening it in RStudio. Both methods for initiating a git repositories that were listed above should have automatically populated your .gitignore file with commonly hidden files.
 
-This file will often be hidden, if this is that case you can view it with the command:
-```{bash eval = FALSE}
-ls -a
-```
-
-Within the .gitignore you can list the files that you do not want to track. The path directory of the files should be relative to the directory of the .gitignore file. You can edit the file using vim, or you can add to the file by opening it in RStudio.
-
-To quickly list the files contained within .gitignore:
-```{bash eval = FALSE}
-cat .gitignore
-```
-
-If you have previously committed a file and want to stop tracking the file without deleting the file from your local working directory, in addition to listing the file in .gitignore, run:
+If you have previously committed a file and want to stop tracking the file without deleting the file from your local working directory, in addition to listing the file in .gitignore, run the following line in either Terminal or Git Bash:
 ```{bash eval = FALSE}
 git rm --cached <.Rhistory>
 ```
@@ -71,54 +45,34 @@ If you want to hide but not delete a folder, you will need to include the argume
 git rm --cached -r <.Rproj.user/**>
 ```
 
-In the above command `/**` indicates that you want to include every file contained within the .Rproj.user folder.
+In the above command `/**` indicates that you want to indicate every file contained within the .Rproj.user folder.
 
 ## Tracking project changes
-Git keeps track of different versions of a project by taking 'snapshots' of the project at times specified by the user. Versions of a project should only be tracked (committed) at the completion of some new feature. Eg: once you have finished reformatting a file, have finished updating a function, or have completed an initial working version of some new function. This will prevent confusion if you ever need to revert to a previous version of a file.
+Git keeps track of different versions of a project by taking 'snapshots' of the project at times specified by the user. Versions of a project should ideally be tracked (committed) at the completion of some new feature. Eg: once you have finished reformatting a file, have finished updating a function, or have completed an initial working version of some new function. This will prevent confusion if you ever need to revert to a previous version of a file.
+
 A tracked file can exist in three stages according to Git. If a file matches the most recently committed version of the file in Git, it is considered Unmodified. If the file is edited in any way, it becomes Modified. When a Modified file is at an appropriate stage to be tracked by Git, it can be marked as a Staged file. Once a Staged file has been committed, this file returns to an Unmodified status.
 
-Figure 2 demonstrates the different states that can exist within a git repository. The git 'database' contains a record of all the commits that have occurred up to date. The working directory is where you as a user do work. You can modify the files in the repository, and while git can recognise that the files in you directory may not match the most recent commit that you have made, git cannot add new changes unless you stage them first. By staging files that have been changed, you indicate which changes to be included in the new snapshot that will be added to the git database. Figure 2 also indicates some example commands that can be used to transition between different states.
+Figure 2 demonstrates the different states that can exist within a git repository. The git 'database' contains a record of all the commits that have occurred up to date. The working directory is where you as a user do work. You can modify the files in the repository, and while git can recognise that the files in your directory may not match the most recent commit, git cannot add new changes unless you stage them first. By staging files that have been changed, you indicate which changes to be included in the new snapshot that will be added to the database. Figure 2 also indicates some example Terminal commands that can be used to transition between different states.
 
 ![<font color = "grey">Figure 2. The different states that files can exist in within a git repository, including commands that can be used to transition between the different states. </font>](pics/GitFigures.jpg)
+As stated previously, a Git repository can easily be initiated by running `use_git()`, including performing your first commit. You can also specify that you want to initiate your RStudio project with a Git repository. If you do it this way however, you will need to create your first commit yourself.
 
-In order to check the status of files in a project tracked by Git:
-```{bash eval = FALSE}
-git status
-```
+In the top right panel, you should see a **Git** tab, if you click on it you will be given a number of tools that will allow you to interact with Git. Along the top of this tab are a number of buttons that replace the most common Git terminal commands. This tab will also list any files that do not match the previous commit. This could be because the file was modified, or because the file has been created or deleted since the last commit. These types of files will appear as shown below. 
 
-This command will return any file that does not match with the previous commit. Modified or untracked files will be listed in red, while deleted files will listed in green (deleted files are already staged, ready to be committed).
+<center><img src="pics/GitTab1.jpg" width="400"></center>
 
-To view exactly how a modified file differs from the most recently commited version of that file, you con run the command:
-```{bash eval = FALSE}
-git diff
-```
+Newly added files will have a yellow question mark under the Status column, while a modified file will have a blue M listed to the right hand side of the column. It can be seen that under the Staged column, neither of the boxes have been ticked off. This means that neither of these files have been staged to be committed. In order to stage files, the user simply needs to tick the boxes listed in the staged column. As shown below.
 
-This will allow you to scroll through the modified files, with previous versions of a line indicated in red, and the new version indicated in green.
+<center><img src="pics/GitTab2.jpg" width="400"></center>
 
-To stage all files that have been modified, or that are untracked so that their current state can be included in the next snapshot, you need to run the following command:
-```{bash eval = FALSE}
-git add -A
-```
+Once these files have been staged, their status will change. New files will be indicated with a green A, while the blue M for modified files will now be listed to the left. To commit the selected files, select the **Commit** button. This will open up a window that will give the opportunity to provide a commit message. Provide a meaningful description of the changes that you have made, then select **Commit**.
 
-The argument `-A` in this case indicated that you want every file moved to the staging area. If you only want to record the changes that have occured in specific files, you will need to instead indicate these specific files:
-```{bash eval = FALSE}
-git add <file>
-```
+If you would like to see the differences in the listed files when compared to the most recent commit, you can select the **Diff** button. This will open up the same window which will also allow the user to explore the differences for each affected file.
 
-If you were to check the status of your files again at this stage, you will see that all the files that you have added to the staging area will be indicated in green. To take a snapshot of your repository, you will now need to commit the changes to your green files:
-```{bash eval = FALSE}
-git commit -m <"Meaningful message indicating which files have changed and why.">
-```
-
-If you were you were to check the status of your files again at this stage, non of the files that you staged will be listed anymore.
-
-To view all the previous commits that you have made:
-```{bash eval = FALSE}
-git log
-```
+<center><img src="pics/Commit.png" width="500"></center>
 
 ## Recovering old versions of your repository
-Git keeps a record of every committed version of a project. Each commit contains the version of each file at the time of the commit, the description of the committed version provided by the user at the time of the commit, as well as a unique ID number generated at the time of the commit. If the commit log is viewed, all previous commits made by users will be listed in reverse chronological order.
+Git keeps a record of every committed version of a project. Each commit contains the version of each file at the time of the commit, the description of the committed version provided by the user at the time of the commit, as well as a unique ID number generated at the time of the commit. If the commit log is viewed, all previous commits made by users will be listed in reverse chronological order. To view this log of the previous commits, you can select the **History** button in the Git tab (looks like a clock).
 
 There are many reasons as to why you may want to revert to a previous version of a file. It could be that the current solution that has been built is not viable, so you want to return to the time before your current fix in order to go in a different direction. It could also be that the current version of the project is broken in some way, and so you want to go back to a functioning version of the code. Regardless of the reason, this is a step that should be taken with caution, because once you have reverted to a previous version of the code, you will lose all the subsequent work that you have done. This risk can be mitigated through the use of branches, which we will discuss later.
 
@@ -185,7 +139,11 @@ merged code
 
 At every point where you see the above, you will need to either choose which of the versions of code to keep, or find a way to incorporate aspects of both. In either case, you will need to manually change the file, including getting rid of the signposting generated by git. If you are using RStudio, you can directly open the file to edit it. You can also use the editor vim within terminal. Once you have made these changes, you will need to commit the new version of the file. The commit message should include which branches were merged and potentially how you resolved any conflicts.
 
-## Suggested workflow for multiple contributors
+## Suggested workflow for multiple 
+https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r
+create_github_token()
+install
+gitcreds_set()
 The proposed work flow is recommended for multiple users to minimize the chance that work is lost. All commands are still run within the directory of the user's local repository. A graphical representation of this work flow can be seen in Figure 3.
 
 On your local repository, build a new temporary branch that you will use to create a new feature:
