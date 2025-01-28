@@ -1,4 +1,4 @@
-# Additional resources
+# Useful links
 
 [Installing Git](http://git-scm.com/downloads)
 

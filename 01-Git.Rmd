@@ -76,7 +76,7 @@ Git keeps a record of every committed version of a project. Each commit contains
 
 There are many reasons as to why you may want to revert to a previous version of a file. It could be that the current solution that has been built is not viable, so you want to return to the time before your current fix in order to go in a different direction. It could also be that the current version of the project is broken in some way, and so you want to go back to a functioning version of the code. Regardless of the reason, this is a step that should be taken with caution, because once you have reverted to a previous version of the code, you will lose all the subsequent work that you have done. This risk can be mitigated through the use of branches, which we will discuss later.
 
-Unfortunately, to go back in time you will need to interact with Terminal (or Git Bash). If you are using a Mac, you should be able to open a Terminal window as part of your RStudio project, just select **Tools** -> **Terminal**. If you are using Windows, you will need to open a Git Bash session and make sure that you are in the correct working directory. This can be done by typing the command `cd` (change directory), and then dragging and dropping the folder into the Git Bash window (this will generate the file path).
+Unfortunately, to go back in time you will need to interact with Terminal (or Git Bash). If you are using a Mac, you should be able to open a Terminal window as part of your RStudio project, just select **Tools** -> **Terminal**, or use that short cut **Shift+Alt+T**. If you are using Windows, you will need to open a Git Bash session and make sure that you are in the correct working directory. This can be done by typing the command `cd` (change directory), and then dragging and dropping the folder into the Git Bash window (this will generate the file path).
 
 If you want to revert to the most recent commit (and loose the most recent modifications that you have made), you can run:
 ```{bash eval = FALSE}
@@ -101,12 +101,19 @@ An amazing feature of git, is the ability to have multiple branches for a projec
 When dealing with branches the following section of the git panel will be relevant.
 <img src="pics/Branch.png" width="150">
 
-To create a new branch click on the **New Branch** button. This will open a new window that will allow you to name your new branch. Once you select **Create**, you will see that the **Main** drop down menu has now changed to your new branch. If you select the drop down menu, you will be able to switch between any branch that you have created. If switching between branches, make sure that you have commited any changes that you want to keep on the current branch.
+To create a new branch click on the **New Branch** button. This will open a new window that will allow you to name your new branch. Once you select **Create**, you will see that the **Main** drop down menu has now changed to your new branch. If you select the drop down menu, you will be able to switch between any branch that you have created. If switching between branches, make sure that you have committed any changes that you want to keep on the current branch.
  
 ## Merging branches
-A consequence of having multiple branches with partially overlapping histories, is that if you want to merge two branches together, there may be conflicts in the code. The way that git merges files is by comparing the changes that have been made to the code in each of the two branches in comparison to the most recent shared commit history (the point in time when the new branch was created). If the changes in each branch have occurred in different files or lines in the code, then git will automatically incorporate those changes. If the same section of code has been modified on both branches, then git will require the user to manually merge the two files.
+A consequence of having multiple branches with partially overlapping histories, is that if you want to merge two branches together, there may be conflicts in the code. The way that git merges files is by comparing the changes that have been made to the code in each of the two branches in comparison to the most recent shared commit history (the point in time when the new branch was created). 
 
-In the case that you are required to manually merge conflicts within a file, git will list the files that require merging. When you open said file, git will indicate all of the locations in the file that have been edited in both of the merged branches as shown in the example bellow:
+To merge another branch into the branch on which you are currently working:
+```{bash, eval = FALSE}
+git merge <otherBranch>
+```
+
+If the changes in each branch have occurred in different files or lines in the code, then git will automatically incorporate those changes. If the same section of code has been modified on both branches, then git will require the user to manually merge the two files.
+
+In the case that you are required to manually merge conflicts within a file, git will list the files that require merging. When you open said file, git will indicate all of the locations in the file that have been edited in both of the merged branches as shown in the example below:
 
 ``` {bash eval = FALSE }
 merged code
@@ -118,74 +125,6 @@ version 2 of code
 merged code
 ```
 
-At every point where you see the above, you will need to either choose which of the versions of code to keep, or find a way to incorporate aspects of both. In either case, you will need to manually change the file, including getting rid of the signposting generated by git. If you are using RStudio, you can directly open the file to edit it. You can also use the editor vim within terminal. Once you have made these changes, you will need to commit the new version of the file. The commit message should include which branches were merged and potentially how you resolved any conflicts.
-
-## Suggested workflow for multiple 
-https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r
-create_github_token()
-install
-gitcreds_set()
-The proposed work flow is recommended for multiple users to minimize the chance that work is lost. All commands are still run within the directory of the user's local repository. A graphical representation of this work flow can be seen in Figure 3.
-
-On your local repository, build a new temporary branch that you will use to create a new feature:
-```{bash eval = FALSE}
-git branch <feature>
-```
-
-Switch to that new branch:
-```{bash eval = FALSE}
-git checkout <feature>
-```
-
-Once you have completed work on your new feature, commit the changes:
-```{bash eval = FALSE}
-git add -A
-git commit -m <"Built new feature.">
-```
-
-Switch back to the master branch and pull any changes that your collaborators may have made. This will allow you to merge any potential incompatibilities on your local machine.
-```{bash eval = FALSE}
-git pull origin master
-git merge <feature>
-```
-
-If there are merge conflicts, resolve them and commit the resolution. Once conflicts are resolved, or if there were no conflicts, you can push your changes to the remote.
-```{bash eval = FALSE}
-git push origin master
-```
-
-Once you have pushed your changes, you can delete the temporary branch:
-```{bash eval = FALSE}
-git branch -d <feature>
-```
-
-![Figure 3. A representation of the workflow that is suggested when collaborating on a project, from the point of view of a single user.](pics/gitFigures3.jpg)
-
-## Using git in RStudio
-
-When developing a project in R, it is beneficial to organise any code or files associated with the project into an R project. This helps to keep your project organised, and also allows the user to take advantage of many of the features of RStudio. In relation to the usage of git, RStudio has it's own built in git user interface. In the top right hand corner of the RStudo IDE is the environment window. If git has been initiated for your project, you should see a git tab. This tab will allow you to perform almost all of the functions that you can perform through the terminal. In addition, in the Consol window, it is possible to open a Terminal tab that can allow you to interact with git as well. Depending on you comfort level and the complexity of what you want to achieve, you can use either of these methods to interact with git through your RStudio session. Personally, I prefer to use Terminal as the built in git features are slow to respond to switching between branches and registering file changes. Terminal instantaneously registers any change in the repository.
-
-Git can be included when opening a new project, as you will be given an option to initiate git. If you have already established a project and want to add git version control, click on **Tools->Version Control->Project Setup...**. You will then be given the option to select the version control system that you want to use.
-
-If you click on the Git tab within RStudio, you will be given a number of tools that will allow you to interact with git (Figure 4). Along the top panel of this tab are a number of buttons that can replace the most common git terminal commands. This tab will also list any files that do not match the previous commit. This could be because the file was modified, or because the file has been created since the last commit. These types of files will appear as listed in Figure 4. Newly added files will have a yellow question mark under the Status column, while a modified file will have a blue M listed on the right side of the column. It can be seen that under the Staged column, neither of the boxes have been ticked off. This means that neither of these files have been staged to be committed. If you would like to see the differenced in the listed files when compared to the most recent commit, you can select the Diff button. This will open up a window which will allow the user to explore the differences for each affected file. It is possible to stage files and commit them within this window. 
-
-<center>
-![Figure 4. An example of the git tab. Two example files have been listed that are not staged to be commited, including one modified file and one new file.](pics/GitTab1.jpg){width=50%}
-</center>
-
-<br>
-
-In order to stage files, the user simply needs to tick the boxed listed in the staged column. As can be seen in Figure 5., once these files have been staged, their status will change. New files will be indicated with a green A, while the blue M for modified files will now be listed to the right. To commit the selected files the user needs to select the Commit button. This will open up a window that will allow the user the opportunity to provide a commit message.
-
-In the top panel of the git tab, it is possible to pull from the remote repository (blue down button), and push to the remote repository (green up button). You can view the previous commit messages by clicking the clock. The blue gear button provides functionality to **Revert...** to previous commits, as well as to modify the **Ignore...** file. The button with purple shapes allows the user to create new branches, as well as add new remote repositories. Finally, you can see the name of the branch currently occupied. In the case of the provided example, this is the 'master' branch. If you click on the branch name, you will be able to switch between the branches that you have created.
-
-<center>
-![Figure 5. An example of the git tab. Two example files have been listed that are staged to be commited, including one modified file and one new file.](pics/GitTab2.jpg){width=50%}
-</center>
-
-### Open Terminal in RStudio
-
-Terminal can be opened from within the RStudio IDE. It is opened next to the Console tab. If it is not already open you can open a new Terminal shell with the following keyboard short-cut: **Shift+Alt+T**. You can also open this window by clicking on **Tools->Terminal->New Terminal**. Once you have a Terminal shell open, you can use it as a regular Terminal window to initiate git and track changes in your project.
-
+At every point where you see the above, you will need to either choose which of the versions of code to keep, or find a way to incorporate aspects of both. In either case, you will need to manually change the file, including getting rid of the signposting generated by git. If you are using RStudio, you can directly open the file to edit it. Once you have made these changes, you will need to commit the new version of the file. The commit message should include which branches were merged and potentially how you resolved any conflicts.
 
 

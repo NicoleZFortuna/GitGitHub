@@ -1,21 +1,42 @@
 # GitHub
-
+https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r
+create_github_token()
+install
+gitcreds_set()
 
 ## Set up an account
+If you want to share your code with others, actively collaborate, or just want a back up of your code, you will benefit from having a GitHib account. GitHub can act as a remote repository which can either be private among a group of developers, or publicly available. To create your own GitHub account use the following link: [Setting up your own GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account).
+
+Once you have your GitHub account, you will need to make sure that Git on your computer can communicate with GitHub. We can do this by using a HTTPS protocol, which will require a personal access token (PAT).
+
+To generate your token:
+```{r, eval=FALSE}
+usethis::create_github_token()
+```
+
+This will take you to a web page that will allow you generate the token. You should make a note of the purpose of the key (eg. what project it is used for), specify the expiry of the token (I recommend no expiry), and choose your scopes (use “repo”, “user”, and “workflow”). Click **Generate token**.
+
+The generated token will not be accessible once you navigate from this page, so store it somewhere or keep the window open.
+
+You can record your PAT using the following function:
+```{r, eval=F}
+gitcreds::gitcreds_set()
+```
+
 
 ## Remote repositories
-
-If you want to share your package with other people, you will need to create a remote repository for your project on a host like GitHub. First you will need to create an account if you do not already have one. Click [here](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account) for instructions on how to do so.
 
 Once you have an account, on the repositories tab of your profile you can select to initiate a new repository. You will be required to name your project, and select if the repository is to be public or private. You can choose if you want to provide a description of your project, or if you want to automatically generate helper files like a README, .gitignore, or a license. If you are creating this remote repository for an already existing local repository you should NOT initiate a README, .gitignore, or choose a license. If you choose to initiate these files you will need to resolve merge conflicts when you try to push your local project to the remote repository.
 
 Once you select **Create repository**, you will be taken to a page with instructions on how set up the repository depending on your particular situation. The commands are provided for you including the correct Git addresses, so you can copy the relevant commands directly into terminal, making sure that you are within the correct local directory. If you use the terminal window within RStudio, you should automatically be in the correct directory.
 
-For example, if you want to push a local repository on to your new remote, you can follow the instructions under the heading "…or push an existing repository from the command line", as bellow:
+For example, if you want to push a local repository on to your new remote, you can follow the instructions under the heading "…or push an existing repository from the command line", which will look something like the below:
 ```
 git remote add origin https://github.com/JohnDoe/test.git
+git branch -M main
 git push -u origin main
 ```
+Literally copy and past the commands into either Terminal or Git Bash. This will likely prompt an opportunity for you to provide your user name and PAT to validate your connection with GitHub.
 
 From this point on, you can work directly with the Git tab on RStudio. Whenever you have an update to the package, commit the change and push the new version to your GitHub repository.
 
@@ -44,7 +65,11 @@ If these checks pass, the following actions will be performed:
 
 ### Clone repository
 
-## Suggested workflow for multiple contributers {-}
+Open a **New Project**. Select **Version Control**, then **Git**. You will need to provide the HTTPS link from the repository that you want to clone, and specify the location that you would like to keep the repository in. Check the **Open in new session box**, the select **Create Project**.
+
+<center><img src="pics/NewProject.png" width="500"></center>
+
+## Suggested workflow for multiple contributers
 The proposed work flow is recommended for multiple users to minimize the chance that work is lost. All commands are still run within the directory of the user's local repository. A graphical representation of this work flow can be seen in Figure 3.
 
 On your local repository, build a new temporary branch that you will use to create a new feature:
@@ -81,7 +106,7 @@ git branch -d <feature>
 
 ![Figure 3. A representation of the workflow that is suggested when collaborating on a project, from the point of view of a single user.](pics/gitFigures3.jpg)
 
-## Using git in RStudio {-}
+## Using git in RStudio 
 
 When developing a project in R, it is beneficial to organise any code or files associated with the project into an R project. This helps to keep your project organised, and also allows the user to take advantage of many of the features of RStudio. In relation to the usage of git, RStudio has it's own built in git user interface. In the top right hand corner of the RStudo IDE is the environment window. If git has been initiated for your project, you should see a git tab. This tab will allow you to perform almost all of the functions that you can perform through the terminal. In addition, in the Consol window, it is possible to open a Terminal tab that can allow you to interact with git as well. Depending on you comfort level and the complexity of what you want to achieve, you can use either of these methods to interact with git through your RStudio session. Personally, I prefer to use Terminal as the built in git features are slow to respond to switching between branches and registering file changes. Terminal instantaneously registers any change in the repository.
 
@@ -105,10 +130,7 @@ In the top panel of the git tab, it is possible to pull from the remote reposito
 
 ### Push and Pull
 
-### Open Terminal in RStudio 
-
-Terminal can be opened from within the RStudio IDE. It is opened next to the Console tab. If it is not already open you can open a new Terminal shell with the following keyboard short-cut: **Shift+Alt+T**. You can also open this window by clicking on **Tools->Terminal->New Terminal**. Once you have a Terminal shell open, you can use it as a regular Terminal window to initiate git and track changes in your project.
-
+In the top panel of the git tab, it is possible to pull from the remote repository (blue down button), and push to the remote repository (green up button).
 
 
 
