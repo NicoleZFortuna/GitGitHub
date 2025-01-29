@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Collaborating with GitHub</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Git setup</a>
@@ -201,11 +201,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To create your own GitHub account use the following link: <a href="https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account">Setting up your own GitHub account</a>.</p>
 <p>Once you have your GitHub account, you will need to make sure that Git on your computer can communicate with GitHub. We can do this by using a HTTPS protocol, which will require a personal access token (PAT).</p>
 <p>To generate your token:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="github.html#cb1-1" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="github.html#cb15-1" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code></pre></div>
 <p>This will take you to a web page that will allow you generate the token. You should make a note of the purpose of the key (eg. what project it is used for), specify the expiry of the token (I recommend no expiry), and choose your scopes (use “repo”, “user”, and “workflow”). Click <strong>Generate token</strong>.</p>
 <p>The generated token will not be accessible once you navigate from this page, so store it somewhere or keep the window open.</p>
 <p>You can record your PAT using the following function:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="github.html#cb2-1" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="github.html#cb16-1" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div>
 </div>
 <div id="remote-repositories" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Remote repositories<a href="github.html#remote-repositories" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -222,7 +222,7 @@ git push -u origin main</code></pre>
 <h3><span class="header-section-number">3.2.1</span> Automatically generating a remote repository<a href="github.html#automatically-generating-a-remote-repository" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If Git on your computer has already been set up to interact with your GitHub account, you will be able to automatically generate a remote repository, and push your local reop to that remote using the <code>usethis</code> package.</p>
 <p>Simply run:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="github.html#cb4-1" tabindex="-1"></a><span class="fu">use_github</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="github.html#cb18-1" tabindex="-1"></a><span class="fu">use_github</span>()</span></code></pre></div>
 <p>The following checks will be performed:</p>
 <ul>
 <li>that the project is already a Git repo</li>
