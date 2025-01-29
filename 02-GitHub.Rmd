@@ -1,13 +1,12 @@
 # GitHub
-https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r
-create_github_token()
-install
-gitcreds_set()
+If you want to share your code with others, actively collaborate, or just want a back up of your code, you will benefit from having a GitHib account. GitHub can act as a remote repository which can either be private among a group of developers, or publicly available. 
+
+Two important concepts when interacting with a remote repository like GitHub are to push and pull. When working on your code, you will always to this from within your local repository. To download code you do not have into your local repository, you 'pull' it from the remote. If you want to share code that you have written to the remote, you must 'push' it there. Once you have set up a connection between a local and remote repository, you interact with the remote primarily by pushing and pulling.
 
 ## Set up an account
-If you want to share your code with others, actively collaborate, or just want a back up of your code, you will benefit from having a GitHib account. GitHub can act as a remote repository which can either be private among a group of developers, or publicly available. To create your own GitHub account use the following link: [Setting up your own GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account).
+ To create your own GitHub account use the following link: [Setting up your own GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account).
 
-Once you have your GitHub account, you will need to make sure that Git on your computer can communicate with GitHub. We can do this by using a HTTPS protocol, which will require a personal access token (PAT).
+Once you have your GitHub account, you will need to make sure that Git on your computer can communicate with GitHub. We can do this by using a HTTPS protocol, which will require a personal access token (PAT). 
 
 To generate your token:
 ```{r, eval=FALSE}
@@ -28,7 +27,7 @@ gitcreds::gitcreds_set()
 
 Once you have an account, on the repositories tab of your profile you can select to initiate a new repository. You will be required to name your project, and select if the repository is to be public or private. You can choose if you want to provide a description of your project, or if you want to automatically generate helper files like a README, .gitignore, or a license. If you are creating this remote repository for an already existing local repository you should NOT initiate a README, .gitignore, or choose a license. If you choose to initiate these files you will need to resolve merge conflicts when you try to push your local project to the remote repository.
 
-Once you select **Create repository**, you will be taken to a page with instructions on how set up the repository depending on your particular situation. The commands are provided for you including the correct Git addresses, so you can copy the relevant commands directly into terminal, making sure that you are within the correct local directory. If you use the terminal window within RStudio, you should automatically be in the correct directory.
+Once you select **Create repository**, you will be taken to a page with instructions on how set up the repository depending on your particular situation. The commands are provided for you including the correct Git addresses, so you can copy the relevant commands directly into Terminal. If you are using Git Bash make sure that you are within the correct local directory. If you use the Terminal window within RStudio, you should automatically be in the correct directory.
 
 For example, if you want to push a local repository on to your new remote, you can follow the instructions under the heading "…or push an existing repository from the command line", which will look something like the below:
 ```
@@ -38,11 +37,13 @@ git push -u origin main
 ```
 Literally copy and past the commands into either Terminal or Git Bash. This will likely prompt an opportunity for you to provide your user name and PAT to validate your connection with GitHub.
 
-From this point on, you can work directly with the Git tab on RStudio. Whenever you have an update to the package, commit the change and push the new version to your GitHub repository.
+From this point on, you can work directly with the Git tab on RStudio. To pull changes from the remote, select the downward blue arrow. Whenever you have an update to the package, commit the change and push the new version to your GitHub repository by selecting the upward green arrow.
+
+<img src="pics/PullPush.png" width="150">
 
 ### Automatically generating a remote repository
 
-If Git on your computer has already been set up to interact with your GitHub account, you will be able to automatically generate a remote repository, and push your package to that remote using the `usethis` package.
+If Git on your computer has already been set up to interact with your GitHub account, you will be able to automatically generate a remote repository, and push your local reop to that remote using the `usethis` package.
 
 Simply run:
 ```{r, eval=FALSE}
@@ -65,72 +66,22 @@ If these checks pass, the following actions will be performed:
 
 ### Clone repository
 
-Open a **New Project**. Select **Version Control**, then **Git**. You will need to provide the HTTPS link from the repository that you want to clone, and specify the location that you would like to keep the repository in. Check the **Open in new session box**, the select **Create Project**.
+If there is an exisiting repository on GitHub that you would like to contribute to, you can clone that repository on to you computer so that you have your own local copy. To do so, open a **New Project**, select **Version Control**, then **Git**. You will need to provide the HTTPS link from the repository that you want to clone, and specify the location that you would like to keep the repository in. Check the **Open in new session box**, the select **Create Project**.
 
-<center><img src="pics/NewProject.png" width="500"></center>
+<center><img src="pics/NewProject.png" width="400"></center>
+
+To find the HTTPS url link, click onto the GitHub page of your repository of interest. You will see a green **Code** drop down menu. Under **Local**, then **HTTPS**, you will see the url that you need to provide.
+
+<center><img src="pics/Clone.png" width="400"></center>
 
 ## Suggested workflow for multiple contributers
-The proposed work flow is recommended for multiple users to minimize the chance that work is lost. All commands are still run within the directory of the user's local repository. A graphical representation of this work flow can be seen in Figure 3.
+The proposed work flow is best practice for multiple users to minimize the chance that work is lost. All actions are performed within the user's local repository. A graphical representation of this work flow can be seen in Figure 3.
 
-On your local repository, build a new temporary branch that you will use to create a new feature:
-```{bash eval = FALSE}
-git branch <feature>
-```
+- On your local repository, build a new temporary branch that you will use to create a new feature. You will do work on this branch, and leave the main branch clean.
+- Once you have completed work on your new feature, commit the changes.
+- Switch back to the master branch and pull any changes that your collaborators may have made. This will allow you to merge any potential incompatibilities on your local machine.
+- If there are merge conflicts, resolve them and commit the resolution. Once conflicts are resolved, or if there were no conflicts, you can push your changes to the remote.
+- Once you have pushed your changes, you can delete the temporary branch.
 
-Switch to that new branch:
-```{bash eval = FALSE}
-git checkout <feature>
-```
-
-Once you have completed work on your new feature, commit the changes:
-```{bash eval = FALSE}
-git add -A
-git commit -m <"Built new feature.">
-```
-
-Switch back to the master branch and pull any changes that your collaborators may have made. This will allow you to merge any potential incompatibilities on your local machine.
-```{bash eval = FALSE}
-git pull origin master
-git merge <feature>
-```
-
-If there are merge conflicts, resolve them and commit the resolution. Once conflicts are resolved, or if there were no conflicts, you can push your changes to the remote.
-```{bash eval = FALSE}
-git push origin master
-```
-
-Once you have pushed your changes, you can delete the temporary branch:
-```{bash eval = FALSE}
-git branch -d <feature>
-```
 
 ![Figure 3. A representation of the workflow that is suggested when collaborating on a project, from the point of view of a single user.](pics/gitFigures3.jpg)
-
-## Using git in RStudio 
-
-When developing a project in R, it is beneficial to organise any code or files associated with the project into an R project. This helps to keep your project organised, and also allows the user to take advantage of many of the features of RStudio. In relation to the usage of git, RStudio has it's own built in git user interface. In the top right hand corner of the RStudo IDE is the environment window. If git has been initiated for your project, you should see a git tab. This tab will allow you to perform almost all of the functions that you can perform through the terminal. In addition, in the Consol window, it is possible to open a Terminal tab that can allow you to interact with git as well. Depending on you comfort level and the complexity of what you want to achieve, you can use either of these methods to interact with git through your RStudio session. Personally, I prefer to use Terminal as the built in git features are slow to respond to switching between branches and registering file changes. Terminal instantaneously registers any change in the repository.
-
-Git can be included when opening a new project, as you will be given an option to initiate git. If you have already established a project and want to add git version control, click on **Tools->Version Control->Project Setup...**. You will then be given the option to select the version control system that you want to use.
-
-If you click on the Git tab within RStudio, you will be given a number of tools that will allow you to interact with git (Figure 4). Along the top panel of this tab are a number of buttons that can replace the most common git terminal commands. This tab will also list any files that do not match the previous commit. This could be because the file was modified, or because the file has been created since the last commit. These types of files will appear as listed in Figure 4. Newly added files will have a yellow question mark under the Status column, while a modified file will have a blue M listed on the right side of the column. It can be seen that under the Staged column, neither of the boxes have been ticked off. This means that neither of these files have been staged to be committed. If you would like to see the differenced in the listed files when compared to the most recent commit, you can select the Diff button. This will open up a window which will allow the user to explore the differences for each affected file. It is possible to stage files and commit them within this window. 
-
-<center>
-![Figure 4. An example of the git tab. Two example files have been listed that are not staged to be commited, including one modified file and one new file.](pics/GitTab1.jpg){width=50%}
-</center>
-
-<br>
-
-In order to stage files, the user simply needs to tick the boxed listed in the staged column. As can be seen in Figure 5., once these files have been staged, their status will change. New files will be indicated with a green A, while the blue M for modified files will now be listed to the right. To commit the selected files the user needs to select the Commit button. This will open up a window that will allow the user the opportunity to provide a commit message.
-
-In the top panel of the git tab, it is possible to pull from the remote repository (blue down button), and push to the remote repository (green up button). You can view the previous commit messages by clicking the clock. The blue gear button provides functionality to **Revert...** to previous commits, as well as to modify the **Ignore...** file. The button with purple shapes allows the user to create new branches, as well as add new remote repositories. Finally, you can see the name of the branch currently occupied. In the case of the provided example, this is the 'master' branch. If you click on the branch name, you will be able to switch between the branches that you have created.
-
-<center>
-![Figure 5. An example of the git tab. Two example files have been listed that are staged to be commited, including one modified file and one new file.](pics/GitTab2.jpg){width=50%}
-</center>
-
-### Push and Pull
-
-In the top panel of the git tab, it is possible to pull from the remote repository (blue down button), and push to the remote repository (green up button).
-
-
-
