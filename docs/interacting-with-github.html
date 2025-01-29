@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Useful links | Collaborating on code with GitHub</title>
-  <meta name="description" content="Chapter 4 Useful links | Collaborating on code with GitHub" />
+  <title>Chapter 3 Interacting with GitHub | Collaborating on code with GitHub</title>
+  <meta name="description" content="Chapter 3 Interacting with GitHub | Collaborating on code with GitHub" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Useful links | Collaborating on code with GitHub" />
+  <meta property="og:title" content="Chapter 3 Interacting with GitHub | Collaborating on code with GitHub" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Useful links | Collaborating on code with GitHub" />
+  <meta name="twitter:title" content="Chapter 3 Interacting with GitHub | Collaborating on code with GitHub" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="interacting-with-github.html"/>
-
+<link rel="prev" href="tracking-code-with-git-in-rstudio.html"/>
+<link rel="next" href="useful-links.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -189,21 +189,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="useful-links" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Useful links<a href="useful-links.html#useful-links" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><a href="http://git-scm.com/downloads">Installing Git</a></p>
-<p><a href="https://happygitwithr.com/">A guide for Git use with R</a></p>
-<p><a href="https://git-scm.com/book/en/v2">Pro Git</a></p>
-<p><a href="https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account">Setting up your own GitHub account</a></p>
+<div id="interacting-with-github" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Interacting with GitHub<a href="interacting-with-github.html#interacting-with-github" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>If you want to share your code with others, actively collaborate, or just want a back up of your code, you will benefit from having a GitHib account. GitHub can act as a remote repository which can either be private among a group of developers, or publicly available.</p>
+<p>Two important concepts when interacting with a remote repository like GitHub are to push and pull. When working on your code, you will always do this from within your local repository. To download code you do not have into your local repository, you ‘pull’ it from the remote. If you want to share code that you have written to the remote, you must ‘push’ it there. Once you have set up a connection between a local and remote repository, you interact with the remote primarily by pushing and pulling.</p>
+<div id="set-up-an-account" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Set up an account<a href="interacting-with-github.html#set-up-an-account" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To create your own GitHub account use the following link: <a href="https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account">Setting up your own GitHub account</a>.</p>
+<p>Once you have your GitHub account, you will need to make sure that Git on your computer can communicate with GitHub. We can do this by using a HTTPS protocol, which will require a personal access token (PAT).</p>
+<p>To generate your token:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="interacting-with-github.html#cb12-1" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code></pre></div>
+<p>This will take you to a web page that will allow you generate the token. You should make a note of the purpose of the key (eg. what project it is used for), specify the expiry of the token (I recommend no expiry), and choose your scopes (use “repo”, “user”, and “workflow”). Click <strong>Generate token</strong>.</p>
+<p>The generated token will not be accessible once you navigate from this page, so store it somewhere or keep the window open.</p>
+<p>You can record your PAT using the following function:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="interacting-with-github.html#cb13-1" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div>
+</div>
+<div id="remote-repositories" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Remote repositories<a href="interacting-with-github.html#remote-repositories" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once you have an account, on the repositories tab of your profile you can select to initiate a new repository. You will be required to name your project, and select if the repository is to be public or private. You can choose if you want to provide a description of your project, or if you want to automatically generate helper files like a README, .gitignore, or a license. If you are creating this remote repository for an already existing local repository you should NOT initiate a README, .gitignore, or choose a license. If you choose to initiate these files you will need to resolve merge conflicts when you try to push your local project to the remote repository.</p>
+<p>Once you select <strong>Create repository</strong>, you will be taken to a page with instructions on how set up the repository depending on your particular situation. The commands are provided for you including the correct Git addresses, so you can copy the relevant commands directly into Terminal. If you are using Git Bash make sure that you are within the correct local directory. If you use the Terminal window within RStudio, you should automatically be in the correct directory.</p>
+<p>For example, if you want to push a local repository on to your new remote, you can follow the instructions under the heading “…or push an existing repository from the command line”, which will look something like the below:</p>
+<pre><code>git remote add origin https://github.com/JohnDoe/test.git
+git branch -M main
+git push -u origin main</code></pre>
+<p>Literally copy and past the commands into either Terminal or Git Bash. This will likely prompt an opportunity for you to provide your user name and PAT to validate your connection with GitHub.</p>
+<p>From this point on, you can work directly with the Git tab on RStudio. To pull changes from the remote, select the downward blue arrow. Whenever you have an update to the package, commit the change and push the new version to your GitHub repository by selecting the upward green arrow.</p>
+<p><img src="pics/PullPush.png" width="150"></p>
+<div id="automatically-generating-a-remote-repository" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Automatically generating a remote repository<a href="interacting-with-github.html#automatically-generating-a-remote-repository" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If Git on your computer has already been set up to interact with your GitHub account, you will be able to automatically generate a remote repository, and push your local reop to that remote using the <code>usethis</code> package.</p>
+<p>Simply run:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="interacting-with-github.html#cb15-1" tabindex="-1"></a><span class="fu">use_github</span>()</span></code></pre></div>
+<p>The following checks will be performed:</p>
+<ul>
+<li>that the project is already a Git repo</li>
+<li>that the current branch is the default branch</li>
+<li>that there are no uncommitted changes</li>
+<li>that there are no pre-existing origin remotes</li>
+</ul>
+<p>If these checks pass, the following actions will be performed:</p>
+<ul>
+<li>An associated repository will be created on your GitHub</li>
+<li>That GitHub repository will be added to your local repository as the origin remote</li>
+<li>Make an initial push to GitHub</li>
+<li>Calls <code>use_github_links()</code> if the project is an R package, so as to add information to the DESCRIPTION file regarding the GitHub repository</li>
+</ul>
+</div>
+<div id="clone-repository" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Clone repository<a href="interacting-with-github.html#clone-repository" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If there is an exisiting repository on GitHub that you would like to contribute to, you can clone that repository on to you computer so that you have your own local copy. To do so, open a <strong>New Project</strong>, select <strong>Version Control</strong>, then <strong>Git</strong>. You will need to provide the HTTPS link from the repository that you want to clone, and specify the location that you would like to keep the repository in. Check the <strong>Open in new session box</strong>, the select <strong>Create Project</strong>.</p>
+<center>
+<img src="pics/NewProject.png" width="400">
+</center>
+<p>To find the HTTPS url link, click onto the GitHub page of your repository of interest. You will see a green <strong>Code</strong> drop down menu. Under <strong>Local</strong>, then <strong>HTTPS</strong>, you will see the url that you need to provide.</p>
+<center>
+<img src="pics/Clone.png" width="400">
+</center>
+</div>
+</div>
+<div id="suggested-workflow-for-multiple-contributers" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Suggested workflow for multiple contributers<a href="interacting-with-github.html#suggested-workflow-for-multiple-contributers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The proposed work flow is best practice for multiple users to minimize the chance that work is lost. All actions are performed within the user’s local repository. A graphical representation of this work flow can be seen in Figure 3.</p>
+<ul>
+<li>On your local repository, build a new temporary branch that you will use to create a new feature. You will do work on this branch, and leave the main branch clean.</li>
+<li>Once you have completed work on your new feature, commit the changes.</li>
+<li>Switch back to the master branch and pull any changes that your collaborators may have made. This will allow you to merge any potential incompatibilities on your local machine.</li>
+<li>If there are merge conflicts, resolve them and commit the resolution. Once conflicts are resolved, or if there were no conflicts, you can push your changes to the remote.</li>
+<li>Once you have pushed your changes, you can delete the temporary branch.</li>
+</ul>
+<div class="float">
+<img src="pics/gitFigures3.jpg" alt="Figure 3. A representation of the workflow that is suggested when collaborating on a project, from the point of view of a single user." />
+<div class="figcaption">Figure 3. A representation of the workflow that is suggested when collaborating on a project, from the point of view of a single user.</div>
+</div>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="interacting-with-github.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="tracking-code-with-git-in-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="useful-links.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -234,7 +301,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-Resources.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-GitHub.Rmd",
 "text": "Edit"
 },
 "history": {

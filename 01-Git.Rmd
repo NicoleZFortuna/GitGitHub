@@ -1,4 +1,4 @@
-# Tracking code with Git
+# Tracking code with Git (in RStudio)
 
 ## Creating a local repository
 A git repository is a set of files associated with a particular project that are tracked together. To track a set of files, git needs to be initiated within the topmost level of a folder containing the work in question. Every file at and within the file hierarchy that git is initiated in will be tracked by git. If you are writing code in R, it is best to organise your code in an RStudio project, and then use RStudio to initiate your repository and track your progress.
@@ -10,10 +10,10 @@ library(usethis)
 ```
 
 ### Initiating a repository for existing code
-If you have Git installed on your computer, you can turn an existing project into a git repository by executing the following line in the of your project:
+If you have Git installed on your computer, you can turn an existing project into a git repository by executing the following line in the console of your RStudio project:
 
 ```{r, eval=FALSE}
-use_git()
+usethis::use_git()
 ```
 
 The function will prompt you to make a first commit. Agree.
@@ -28,7 +28,7 @@ In RStudio, click on **File** -> **New Project**, or the <img src="pics/ProjectB
 
 <center><img src="pics/ProjectPrompt.png" width="400"></center>
 
-A new RStudio window will open containing your new project. In your project window, you will see that a number of files have been automatically generated. These are your project file, and .gitignore file. We will talk about .gitigore later on. You should see these files listed in the Git tab in the top right hand panel. Now would be a good time to make your first commit. Go to the [**How to use git to track your package over time**](## how-to-use-git-to-track-your-package-over-time) section for instructions on how to do this.
+A new RStudio window will open containing your new project. In your project window, you will see that a number of files have been automatically generated. These are your project file, and .gitignore file. We will talk about .gitigore later on. You should see these files listed in the Git tab in the top right hand panel. Now would be a good time to make your first commit. Go to the [**Tracking project changes**](#tracking-project-changes) section for instructions on how to do this.
 
 ## Hiding files from git
 Within a project there are often a number of invisible files that are created automatically by the tools being used. For example, R will often generate a .Rhistory file that is of no benefit to you to track. In this case it is advisable to hide these files from git in order to prevent them from being unnecessarily tracked. Files are hidden from Git by placing them in a .gitignore file within the same directory that you initiated git.
@@ -47,7 +47,7 @@ git rm --cached -r <.Rproj.user/**>
 
 In the above command `/**` indicates that you want to indicate every file contained within the .Rproj.user folder.
 
-## Tracking project changes
+## Tracking project changes {#tracking-project-changes}
 Git keeps track of different versions of a project by taking 'snapshots' of the project at times specified by the user. Versions of a project should ideally be tracked (committed) at the completion of some new feature. Eg: once you have finished reformatting a file, have finished updating a function, or have completed an initial working version of some new function. This will prevent confusion if you ever need to revert to a previous version of a file.
 
 A tracked file can exist in three stages according to Git. If a file matches the most recently committed version of the file in Git, it is considered Unmodified. If the file is edited in any way, it becomes Modified. When a Modified file is at an appropriate stage to be tracked by Git, it can be marked as a Staged file. Once a Staged file has been committed, this file returns to an Unmodified status.

@@ -1,8 +1,7 @@
 git-setup
 what-is-git
 setup-git-on-your-computer
-getting-help-with-git
-tracking-code-with-git
+tracking-code-with-git-in-rstudio
 creating-a-local-repository
 initiating-a-repository-for-existing-code
 initiating-a-new-project-with-git
@@ -11,7 +10,7 @@ tracking-project-changes
 recovering-old-versions-of-your-repository
 creating-and-switching-between-branches
 merging-branches
-github
+interacting-with-github
 set-up-an-account
 remote-repositories
 automatically-generating-a-remote-repository

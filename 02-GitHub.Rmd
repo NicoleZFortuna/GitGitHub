@@ -1,7 +1,7 @@
-# GitHub
+# Interacting with GitHub
 If you want to share your code with others, actively collaborate, or just want a back up of your code, you will benefit from having a GitHib account. GitHub can act as a remote repository which can either be private among a group of developers, or publicly available. 
 
-Two important concepts when interacting with a remote repository like GitHub are to push and pull. When working on your code, you will always to this from within your local repository. To download code you do not have into your local repository, you 'pull' it from the remote. If you want to share code that you have written to the remote, you must 'push' it there. Once you have set up a connection between a local and remote repository, you interact with the remote primarily by pushing and pulling.
+Two important concepts when interacting with a remote repository like GitHub are to push and pull. When working on your code, you will always do this from within your local repository. To download code you do not have into your local repository, you 'pull' it from the remote. If you want to share code that you have written to the remote, you must 'push' it there. Once you have set up a connection between a local and remote repository, you interact with the remote primarily by pushing and pulling.
 
 ## Set up an account
  To create your own GitHub account use the following link: [Setting up your own GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account).

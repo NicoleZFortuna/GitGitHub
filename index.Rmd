@@ -19,9 +19,9 @@ People who use git, will generally utilise both local and remote repositories fo
 ![<font color = "grey">Figure 1. Example interaction between multiple developers of a project. Commits represet snapshots in time and are listed in reverse chronological order. Commits have been restricted to the two most recent for simplicity's sake. </font>](pics/gitFigures2.jpg)
 
 
-The most commonly used host for remote git repositories is [github](http://www.github.com), however there exists many alternatives like [bitbucket](htt://https://bitbucket.org/), and [GitLab](https://about.gitlab.com/). Local repositories can be interacted with directly from the Terminal. However, many GUIs have been created over the years in order to make git more user friendly. If your project is being developed using RStudio, this IDE (Integrated Development Environment) already comes with inbuilt git functionality. Otherwise, a popular and easy to use GUI is [GitHub Desktop](http://https://desktop.github.com/).  
+The most commonly used host for remote git repositories is [github](http://www.github.com), however there exists many alternatives like bitbucket, and GitLab. Local repositories can be interacted with directly from the Terminal. However, many GUIs have been created over the years in order to make git more user friendly. If your project is being developed using RStudio, this IDE (Integrated Development Environment) already comes with inbuilt git functionality. Otherwise, a popular and easy to use GUI is [GitHub Desktop](https://desktop.github.com/download/).  
 
-For the purposes of this tutorial, we will demonstrate how to interact with git directly through RStudio as it integrates conveniently with projects. There are a few occasions where you will need to interact with Git through Terminal (or Git Bash if you are on Windows), however this will only be during set up. When giving example Terminal commands, anything set between these symbols <> represents a variable input to be provided by the user. This tutorial gives a working knowledge of git which should be adequate for most git users. For additional help and further functionality, the book [Pro Git](https://git-scm.com/book/en/v2) is recommended.
+For the purposes of this tutorial, we will demonstrate how to interact with git directly through RStudio as it integrates conveniently with projects. There are a few occasions where you will need to interact with Git through Terminal (or Git Bash if you are on Windows), however this mostly only be during set up. When giving example Terminal commands, anything set between these symbols <> represents a variable input to be provided by the user. This tutorial gives a working knowledge of git which should be adequate for most git users. For additional help and further functionality, the book [Pro Git](https://git-scm.com/book/en/v2) is recommended.
 
 ## Setup git on your computer
 To download git, visit [https://git-scm.com/downloads](https://git-scm.com/downloads) if you have a Mac, or [https://gitforwindows.org/](https://gitforwindows.org/) if you have a Windows machine. The link for Windows will also download Git Bash which is useful for setting up Git on your computer.
@@ -43,21 +43,3 @@ To check that the user details have been set correctly:
 git config --list
 ```
 
-
-### Getting help with git
-To get help directly from the terminal, the following commands are useful.
-
-To get help with the most common git commands:
-```{bash eval = FALSE}
-git help
-```
-
-For more commands:
-```{bash eval = FALSE}
-git help -a
-```
-
-For help with a specific command:
-```{bash eval = FALSE}
-git help <config>
-```

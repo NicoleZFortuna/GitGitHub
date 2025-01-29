@@ -4,7 +4,10 @@
 
 [A guide for Git use with R](https://happygitwithr.com/)
 
+[Pro Git](https://git-scm.com/book/en/v2)
+
 [Setting up your own GitHub account](https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account)
+
 
 
 
